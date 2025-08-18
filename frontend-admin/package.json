@@ -1,0 +1,42 @@
+{
+  "name": "online-mall-admin",
+  "version": "1.0.0",
+  "description": "在线商城管理端",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 57484",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "type-check": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "vue": "^3.4.29",
+    "vue-router": "^4.3.3",
+    "pinia": "^2.1.7",
+    "axios": "^1.7.2",
+    "element-plus": "^2.7.6",
+    "@element-plus/icons-vue": "^2.3.1",
+    "echarts": "^5.5.1",
+    "vue-echarts": "^6.7.3",
+    "dayjs": "^1.11.11",
+    "js-cookie": "^3.0.5",
+    "@vueuse/core": "^10.11.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/tsconfig": "^0.5.1",
+    "typescript": "~5.4.0",
+    "vue-tsc": "^2.0.21",
+    "vite": "^5.3.1",
+    "unplugin-auto-import": "^0.17.6",
+    "unplugin-vue-components": "^0.27.0",
+    "unplugin-icons": "^0.19.0",
+    "@types/js-cookie": "^3.0.6",
+    "sass": "^1.77.6",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
+    "eslint-plugin-vue": "^9.26.0"
+  }
+}
