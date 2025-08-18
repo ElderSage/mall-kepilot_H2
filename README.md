@@ -110,14 +110,29 @@ npm run dev
 
 ## 🗄️ 数据库
 
-### 开发环境 (H2)
+### 开发环境 (H2) - 默认配置
 - 控制台: `http://localhost:8080/h2-console`
 - JDBC URL: `jdbc:h2:mem:mall`
 - 用户名: `sa`
 - 密码: (空)
 
-### 生产环境 (MySQL)
-修改 `application-prod.yml` 中的数据库配置。
+### 生产环境 (MySQL) - 推荐配置
+
+#### 快速启动MySQL
+```bash
+# 使用Docker Compose一键启动MySQL
+docker-compose up -d mysql
+
+# 使用MySQL配置启动后端
+mvn spring-boot:run -Dspring.profiles.active=prod
+```
+
+#### 手动配置MySQL
+1. 安装MySQL 8.0
+2. 执行初始化脚本: `backend/src/main/resources/sql/mysql-init.sql`
+3. 修改配置: `backend/src/main/resources/application-prod.yml`
+
+详细配置请参考: [MySQL配置指南](MYSQL_SETUP.md)
 
 ## 🎯 核心功能演示
 
