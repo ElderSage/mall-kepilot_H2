@@ -1,6 +1,6 @@
 package com.mall.controller;
 
-import com.mall.common.ApiResponse;
+import com.mall.dto.ApiResponse;
 import com.mall.entity.Category;
 import com.mall.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,8 +31,9 @@ public class CategoryController {
     @GetMapping("/{id}")
     @Operation(summary = "根据ID获取分类")
     public ApiResponse<Category> getCategoryById(@PathVariable Long id) {
-        Category category = categoryService.getCategoryById(id);
-        return ApiResponse.success(category);
+        return categoryService.getCategoryById(id)
+                .map(ApiResponse::success)
+                .orElse(ApiResponse.error("分类不存在"));
     }
 
     @PostMapping
@@ -45,15 +46,22 @@ public class CategoryController {
     @PutMapping("/{id}")
     @Operation(summary = "更新分类")
     public ApiResponse<Category> updateCategory(@PathVariable Long id, @RequestBody Category category) {
-        category.setId(id);
-        Category updated = categoryService.updateCategory(category);
-        return ApiResponse.success(updated);
+        Category updated = categoryService.updateCategory(id, category);
+        if (updated != null) {
+            return ApiResponse.success(updated);
+        } else {
+            return ApiResponse.error("分类不存在");
+        }
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "删除分类")
-    public ApiResponse<Void> deleteCategory(@PathVariable Long id) {
-        categoryService.deleteCategory(id);
-        return ApiResponse.success();
+    public ApiResponse<String> deleteCategory(@PathVariable Long id) {
+        boolean deleted = categoryService.deleteCategory(id);
+        if (deleted) {
+            return ApiResponse.success("删除成功");
+        } else {
+            return ApiResponse.error("分类不存在");
+        }
     }
 }
