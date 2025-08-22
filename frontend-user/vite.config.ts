@@ -27,7 +27,7 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
-    port: 50719,
+    port: 57484,
     cors: true,
     proxy: {
       '/api': {
@@ -37,14 +37,7 @@ export default defineConfig({
       }
     }
   },
-  css: {
-    postcss: {
-      plugins: [
-        'tailwindcss',
-        'autoprefixer'
-      ]
-    }
-  },
+
   build: {
     outDir: 'dist',
     assetsDir: 'assets',

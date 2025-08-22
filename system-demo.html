@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线商城系统演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .status-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            border-left: 5px solid #4facfe;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .status-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .status-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px 0;
+        }
+        
+        .status-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .status-value {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .status-success {
+            color: #28a745;
+        }
+        
+        .status-error {
+            color: #dc3545;
+        }
+        
+        .links-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .links-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .link-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: #4facfe;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .link-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #4facfe;
+        }
+        
+        .link-desc {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .tech-stack {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .tech-stack h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .tech-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .tech-item h4 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .tech-item p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .status-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛒 在线商城系统</h1>
+            <p>基于 Vue3 + Spring Boot 的现代化电商平台</p>
+        </div>
+        
+        <div class="content">
+            <div class="status-grid">
+                <div class="status-card">
+                    <h3>🚀 系统状态</h3>
+                    <div class="status-item">
+                        <span class="status-label">后端服务 (8080)</span>
+                        <span class="status-value status-success" id="backend-status">检测中...</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">用户前端 (57484)</span>
+                        <span class="status-value status-success" id="user-frontend-status">检测中...</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">管理前端 (50719)</span>
+                        <span class="status-value status-success" id="admin-frontend-status">检测中...</span>
+                    </div>
+                </div>
+                
+                <div class="status-card">
+                    <h3>📊 数据统计</h3>
+                    <div class="status-item">
+                        <span class="status-label">商品总数</span>
+                        <span class="status-value" id="product-count">加载中...</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">商品分类</span>
+                        <span class="status-value" id="category-count">加载中...</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">API响应时间</span>
+                        <span class="status-value" id="api-response-time">测试中...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="links-section">
+                <h3>🔗 快速访问</h3>
+                <div class="links-grid">
+                    <a href="http://localhost:57484" class="link-card" target="_blank">
+                        <div class="link-title">👥 用户商城</div>
+                        <div class="link-desc">商品浏览、购物车、订单管理等用户功能</div>
+                    </a>
+                    <a href="http://localhost:50719" class="link-card" target="_blank">
+                        <div class="link-title">⚙️ 管理后台</div>
+                        <div class="link-desc">商品管理、订单处理、数据分析等管理功能</div>
+                    </a>
+                    <a href="http://localhost:8080/swagger-ui.html" class="link-card" target="_blank">
+                        <div class="link-title">📚 API文档</div>
+                        <div class="link-desc">完整的RESTful API接口文档和测试工具</div>
+                    </a>
+                    <a href="http://localhost:8080/h2-console" class="link-card" target="_blank">
+                        <div class="link-title">🗄️ 数据库控制台</div>
+                        <div class="link-desc">H2数据库管理界面，查看和管理数据</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-stack">
+                <h3>🛠️ 技术栈</h3>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <h4>前端技术</h4>
+                        <p>Vue 3, TypeScript, Vite, Element Plus, Pinia</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>后端技术</h4>
+                        <p>Spring Boot 3, Spring Security, JPA, H2 Database</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>开发工具</h4>
+                        <p>Maven, npm, Swagger, JWT认证</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>特色功能</h4>
+                        <p>响应式设计, RESTful API, 权限管理, 数据分析</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 在线商城系统 - 现代化电商解决方案</p>
+        </div>
+    </div>
+
+    <script>
+        // 检查服务状态
+        async function checkServiceStatus() {
+            const services = [
+                { id: 'backend-status', url: 'http://localhost:8080/api/products', name: '后端服务' },
+                { id: 'user-frontend-status', url: 'http://localhost:57484', name: '用户前端' },
+                { id: 'admin-frontend-status', url: 'http://localhost:50719', name: '管理前端' }
+            ];
+
+            for (const service of services) {
+                try {
+                    const startTime = Date.now();
+                    const response = await fetch(service.url, { 
+                        method: 'GET',
+                        mode: 'no-cors'
+                    });
+                    const endTime = Date.now();
+                    
+                    document.getElementById(service.id).textContent = '✅ 运行正常';
+                    document.getElementById(service.id).className = 'status-value status-success';
+                    
+                    if (service.id === 'backend-status') {
+                        document.getElementById('api-response-time').textContent = `${endTime - startTime}ms`;
+                    }
+                } catch (error) {
+                    document.getElementById(service.id).textContent = '❌ 连接失败';
+                    document.getElementById(service.id).className = 'status-value status-error';
+                }
+            }
+        }
+
+        // 获取商品数据
+        async function loadProductData() {
+            try {
+                const response = await fetch('http://localhost:8080/api/products');
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('product-count').textContent = data.data.totalElements + ' 个';
+                    
+                    // 统计分类数量
+                    const categories = new Set();
+                    data.data.content.forEach(product => {
+                        if (product.category) {
+                            categories.add(product.category.name);
+                        }
+                    });
+                    document.getElementById('category-count').textContent = categories.size + ' 个';
+                }
+            } catch (error) {
+                document.getElementById('product-count').textContent = '加载失败';
+                document.getElementById('category-count').textContent = '加载失败';
+            }
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            checkServiceStatus();
+            loadProductData();
+            
+            // 每30秒检查一次服务状态
+            setInterval(checkServiceStatus, 30000);
+        });
+    </script>
+</body>
+</html>

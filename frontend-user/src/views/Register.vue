@@ -41,7 +41,7 @@
             left-icon="lock"
             :rules="[
               { required: true, message: '请输入密码' },
-              { min: 6, message: '密码至少6位' }
+              { validator: (val: string) => val.length >= 6, message: '密码至少6位' }
             ]"
             clearable
           />
